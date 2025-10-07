@@ -1,35 +1,38 @@
 import pandas as pd
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import csv
-# # C:\Users\jayde\OneDrive\Documents\
-# def load_csv(file_path):
-#     with open(file_path, "r") as f:
-#         rows = csv.DictReader(f)
-#         print(rows)
-
-# BTC = load_csv("..\\..\\50_coins_crypto_1h_data_cryptocompare\\BTCUSDT_1h.csv")
-# for row in BTC:
-#     print(row)
-
-
-
-# file_path = r"..\..\OneDrive\Documents\50_coins_crypto_1h_data_cryptocompare\BTCUSDT_1h.csv"
-
-# with open(file_path, "r") as f:
-#     data = f.read()
-
-# print(data[:200])  # first 200 characters
-
-
 import os
+import copy
+
 
 csv_path = os.path.expanduser(r"~\OneDrive\Documents\50_coins_crypto_1h_data_cryptocompare\BTCUSDT_1h.csv")
 
-with open(csv_path, "r") as f:
-    data = f.read()
 
-print(csv_path)
-print(data[:200])
+df = pd.read_csv(csv_path)
+df = df.head(20)
+# print(df.head(5))
 
-        
+
+
+plt.figure(figsize = (12, 6))
+plt.plot(df["timestamp"], df["close"], label = "hr close")
+
+plt.xlabel("Time")
+plt.xticks(rotation = 45)
+plt.ylabel("Close Price")
+plt.title("BTC")
+plt.legend()
+
+plt.show()
+
+# def load_csv(csv_path):
+#     with open(csv_path, "r") as f:
+#         rows = csv.DictReader(f)
+#         rows = list(rows)
+#         rows = copy.deepcopy(rows)
+#         return rows
+
+# BTC = load_csv(csv_path)
+# for row in BTC:
+#     print(row)
